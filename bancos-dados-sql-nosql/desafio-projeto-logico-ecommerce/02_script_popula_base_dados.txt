@@ -1,0 +1,214 @@
+USE `e_commerce`;
+
+-- Cidades
+insert into cidade (nome, uf) values ('Belo Horizonte','MG');
+insert into cidade (nome, uf) values ('Lagoa Santa','MG');
+insert into cidade (nome, uf) values ('Betim','MG');
+insert into cidade (nome, uf) values ('Brasília','DF');
+insert into cidade (nome, uf) values ('São Paulo','SP');
+insert into cidade (nome, uf) values ('Rio de Janeiro','RJ');
+insert into cidade (nome, uf) values ('Itajaí','SC');
+---
+
+-- Fornecedores - Inclusão registro pai e filho em sequência para obter o id correto
+insert into fornecedor (cnpj) values ('40.195.522/0001-00');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'ACME','ACME','Rua doze, 301/120','30.865-500',1,'Coyote',LAST_INSERT_ID(), null);
+ 
+insert into fornecedor (cnpj) values ('65.571.289/0001-44');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Americanas S/A','Lojas Americanas','Rua Treze, 30','30.865-600',5,'João',LAST_INSERT_ID(), null);
+ 
+insert into fornecedor (cnpj) values ('83.635.730/0001-96');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Coletas S/A',null,'Rua Quatorze, 230','60.865-600',6,'João',LAST_INSERT_ID(), null);
+
+insert into fornecedor (cnpj) values ('72.631.799/0001-25');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Siri Cascudo',null,'Fenda do Biquine, 1','11.865-600',6,'Siriguejo',LAST_INSERT_ID(), null);
+--
+
+-- Vendedores - Inclusão registro pai e filho em sequência para obter o id correto
+insert into vendedor (tipo_pessoa, identificacao) values ('Física','939.608.250-30');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Bruno Marrone',null,'Rua das Acácias, 25','12.860-600',7,null, null, LAST_INSERT_ID());
+
+insert into vendedor (tipo_pessoa, identificacao) values ('Física','887.573.360-08');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Silva de Souza',null,'Rua das Margaridas, 55','25.860-600',7,null, null, LAST_INSERT_ID());
+
+insert into vendedor (tipo_pessoa, identificacao) values ('Jurídica','01.251.444/0001-62');
+insert into dados_fornec_vend (
+ razao_social, nome_fantasia, endereco, cep, idcidade, contato, idfornecedor, idvendedor)
+values (
+ 'Cia das Letras S/A',null,'Rua das Orquídeas, 66','35.860-600',3,null, null, LAST_INSERT_ID());
+-- 
+
+-- Estoque - locais
+insert into estoque (local) values ('Centro de distribuição 1');
+insert into estoque (local) values ('Centro de distribuição 2');
+insert into estoque (local) values ('Centro de distribuição 3');
+
+-- Produtos
+insert into produto (descricao, valor_unitario, categoria)
+values ('Celular', 1325, 'Eletrônico');
+
+insert into produto (descricao, valor_unitario, categoria, size)
+values ('Camisa do Brasil', 39.99, 'Vestimenta', 'P');
+
+insert into produto (descricao, valor_unitario, categoria, size)
+values ('Camisa do Brasil', 39.99, 'Vestimenta', 'M');
+
+insert into produto (descricao, valor_unitario, categoria, size)
+values ('Camisa do Brasil', 39.99, 'Vestimenta', 'G');
+
+insert into produto (descricao, valor_unitario, categoria)
+values ('Buzz Lightyear', 125, 'Brinquedos');
+
+insert into produto (descricao, valor_unitario, categoria)
+values ('Hamburguer de Siri', 12.5, 'Alimentos');
+
+insert into produto (descricao, valor_unitario, categoria, size)
+values ('Cadeira giratória', 612.5, 'Móveis', '60x80');
+
+-- Estoque
+insert into produto_estoque (idproduto, idestoque, quantidade) values (1,1,5);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (2,1,10);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (3,1,15);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (4,1,20);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (5,1,25);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (6,1,30);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (7,1,35);
+
+insert into produto_estoque (idproduto, idestoque, quantidade) values (1,2,2);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (2,2,4);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (3,2,6);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (4,2,8);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (5,2,10);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (6,2,12);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (7,2,14);
+
+insert into produto_estoque (idproduto, idestoque, quantidade) values (1,3,5);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (2,3,6);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (3,3,7);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (4,3,8);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (5,3,9);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (6,3,10);
+insert into produto_estoque (idproduto, idestoque, quantidade) values (7,3,11);
+-- 
+
+-- Produto x vendedor
+insert into produtos_vendedor (idvendedor, idproduto, quantidade) values (1,2,10);
+insert into produtos_vendedor (idvendedor, idproduto, quantidade) values (1,3,10);
+insert into produtos_vendedor (idvendedor, idproduto, quantidade) values (1,4,5);
+--
+-- Produto x fornecedor
+insert into fornecedor_produto (idfornecedor, idproduto, quantidade) values (1,1,10);
+insert into fornecedor_produto (idfornecedor, idproduto, quantidade) values (2,2,20);
+insert into fornecedor_produto (idfornecedor, idproduto, quantidade) values (3,3,15);
+insert into fornecedor_produto (idfornecedor, idproduto, quantidade) values (4,4,10);
+--
+-- Clientes
+insert into cliente (
+ pnome, minit, sobrenome, tipo_pessoa, identificacao, endereco, cep, idcidade,
+ email, codigo_pais, ddd_celular, celular, data_nascimento)
+values (
+ 'João','de','Deus','Física','656.315.360-72','Rua dos Abacates, 32','30.865-500', 1,
+ 'joaodeus@gmail.com','55','31','989572233','1972-05-17');
+ 
+insert into cliente (
+ pnome, minit, sobrenome, tipo_pessoa, identificacao, endereco, cep, idcidade,
+ email, codigo_pais, ddd_celular, celular, data_nascimento)
+values (
+ 'João',null,'Maria','Física','844.130.890-06','Rua dos Abacaxis, 22','30.865-500', 1,
+ 'joaomaria@gmail.com','55','31','989572222','1972-05-17');
+ 
+insert into cliente (
+ pnome, minit, sobrenome, tipo_pessoa, identificacao, endereco, cep, idcidade,
+ email, codigo_pais, ddd_celular, celular, data_nascimento)
+values (
+ 'Maria',null,'Silva','Física','451.466.020-50','Rua das Beterrabas, 22','30.865-500', 4,
+ 'mariasilva@gmail.com','55','31','989572244','1978-05-17');
+ 
+insert into cliente (
+ pnome, minit, sobrenome, tipo_pessoa, identificacao, endereco, cep, idcidade,
+ email, codigo_pais, ddd_celular, celular, data_nascimento)
+values (
+ 'C&A',null,null,'Jurídica','32.037.377/0001-01','Rua dos Brocolis, 3','30.865-500', 3,
+ 'mariasilva@gmail.com','55','31','989572244','1985-01-10');
+-- 
+
+-- Pedido x itens x pagamentos
+insert into pedido (
+ idcliente, data_cadastro, status_pedido, endereco_entrega, cep_entrega, idCidade, codigo_rastreio_entrega)
+values (1, current_date(), 'Enviado', 'Rua das Bicas, 22','30.865-500', 1,'XXKXDK12323');
+
+insert into produto_pedido (idproduto, idpedido, quantidade, valor_venda, idestoque)
+values (1, 1, 1, 1325, 1);
+
+insert into produto_pedido (idproduto, idpedido, quantidade, valor_venda, idestoque)
+values (2, 1, 3, 39.99, 2);
+ 
+insert into produto_pedido (idproduto, idpedido, quantidade, valor_venda, idestoque)
+values (3, 1, 1, 39.99, 1);
+
+insert pagamento_pedido (
+ idpedido, forma_de_pagamento, status_pagamento, valor_pagamento,
+ nro_cartao, nome_titular_cartao, data_validade_cartao, numero_autorizacao_cartao,
+ motivo_rejeicao_cartao, numero_boleto)
+values (
+ 1, 'Cartão','Pendente', 1364.99,
+ '9393-3039-03002','JOAO DE DEUS', '2025-01-01','EIEI939202',
+ null, null);
+
+insert pagamento_pedido (
+ idpedido, forma_de_pagamento, status_pagamento, valor_pagamento,
+ nro_cartao, nome_titular_cartao, data_validade_cartao, numero_autorizacao_cartao,
+ motivo_rejeicao_cartao, numero_boleto)
+values (
+ 1, 'Dinheiro','Confirmado', 39.99,
+ null,null,null,null, null, null);
+-- 
+
+insert into pedido (
+ idcliente, data_cadastro, status_pedido, endereco_entrega, cep_entrega, idCidade, codigo_rastreio_entrega)
+values (2, current_date(), 'Em andamento', 'Rua dos Bicudos, 11','30.865-500', 2, null);
+
+insert into produto_pedido (idproduto, idpedido, quantidade, valor_venda, idestoque)
+values (3, 2, 1, 125, 1);
+
+insert pagamento_pedido (
+ idpedido, forma_de_pagamento, status_pagamento, valor_pagamento,
+ nro_cartao, nome_titular_cartao, data_validade_cartao, numero_autorizacao_cartao,
+ motivo_rejeicao_cartao, numero_boleto)
+values (
+ 1, 'Boleto','Pendente', 125,
+ null, null, null, null, null, null);
+--
+
+insert into pedido (
+ idcliente, data_cadastro, status_pedido, endereco_entrega, cep_entrega, idCidade, codigo_rastreio_entrega)
+values (3, current_date() - 3, 'Entregue', 'Rua dos Bicudos, 11','30.865-500', 2, null);
+
+insert into produto_pedido (idproduto, idpedido, quantidade, valor_venda, idestoque)
+values (6, 3, 1, 12.5, 1);
+
+insert pagamento_pedido (
+ idpedido, forma_de_pagamento, status_pagamento, valor_pagamento,
+ nro_cartao, nome_titular_cartao, data_validade_cartao, numero_autorizacao_cartao,
+ motivo_rejeicao_cartao, numero_boleto)
+values (
+ 3, 'Dinheiro','Confirmado', 12.5,
+ null, null, null, null, null, null);
