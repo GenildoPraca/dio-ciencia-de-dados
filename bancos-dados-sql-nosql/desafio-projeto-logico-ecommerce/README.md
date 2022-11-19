@@ -20,3 +20,4 @@ A partir do modelo original proposto durante o curso foi desenvolvido o modelo a
 * **01_script_criacao_base_dados.txt** - arquivo de script com os comandos sql necessários para a criação do banco de dados no SGBD MySQL;
 * **02_script_popula_base_dados.txt** - arquivo de script para popular as tabelas com um pequeno volume de dados para testes de conceito;
 * **03_script_consulta_dados.txt** - arquivo de script contendo consultas SQL solicitadas no desafio entre outras que julguei pertinentes;
+* **e_commerce_refinado.mwb** - arquivo MySQL Workbench
