@@ -1,0 +1,92 @@
+use e_commerce;
+
+-- Recuperações simples com SELECT Statement
+-- Listar produtos cadastrados
+select * from produto;
+
+-- Filtros com WHERE Statement
+-- Listar produtos da categoria Eletrônico
+select * from produto where categoria = 'Eletrônico';
+
+-- Crie expressões para gerar atributos derivados
+-- Valor total do pedido por cliente a partir dos itens
+select p.idpedido, concat(c.pnome , ' ', concat(ifnull(c.minit,''), ' '), c.sobrenome) cliente, sum(pp.valor_venda) total_pedido
+  from pedido p
+ inner join cliente c
+    on p.idcliente = c.idcliente
+ inner join produto_pedido pp
+    on p.idpedido = pp.idpedido
+ group by p.idpedido, concat(c.pnome , ' ', concat(ifnull(c.minit,''), ' '), c.sobrenome);
+ 
+-- Quantidade Pedidos por cliente
+select concat(c.pnome , ' ', concat(ifnull(c.minit,''), ' '), c.sobrenome) nome , count(1) qtd
+  from cliente c
+ inner join pedido p
+    on c.idcliente = p.idcliente
+ group by c.pnome;
+
+-- Quantidade produto pedidos
+select p.descricao, sum(i.quantidade) qtd
+  from produto_pedido i
+ inner join produto p
+    on i.idproduto = p.idproduto
+ group by p.descricao;
+ 
+-- Defina ordenações dos dados com ORDER BY
+-- Quantidade disponível em estoque por centro de distribuição
+select e.local, p.descricao, sum(pe.quantidade - pe.qtd_reservada) qtd_disponivel
+  from produto p
+ inner join produto_estoque pe
+    on p.idproduto = pe.idproduto
+ inner join estoque e
+    on pe.idestoque = e.idestoque
+ group by e.local, p.descricao
+ order by 1,2;
+
+-- Condições de filtros aos grupos – HAVING Statement
+-- Clientes com mais de um pedido
+select concat(c.pnome , ' ', concat(ifnull(c.minit,''), ' '), c.sobrenome) nome , count(1) qtd
+  from cliente c
+ inner join pedido p
+    on c.idcliente = p.idcliente
+ group by c.pnome
+ having count(1) > 1;
+ 
+-- Crie junções entre tabelas para fornecer uma perspectiva mais complexa dos dados
+
+-- Quantidade de clientes sem pedido
+select count(1)
+  from cliente c
+ where not exists
+       (select 1
+          from pedido p
+         where p.idcliente = c.idcliente);
+         
+-- Quantidade reservada por produto - desmonstra funcionamento correto da trigger
+select p.descricao, sum(pe.qtd_reservada) qtd_reservada
+  from produto p
+ inner join produto_estoque pe
+    on p.idproduto = pe.idproduto
+ where pe.qtd_reservada > 0    
+ group by p.descricao;
+ 
+-- Valores por Formas de pagamento utilizadas
+select forma_de_pagamento, sum(valor_pagamento) valor
+  from pagamento_pedido
+ where status_pagamento <> 'Rejeitado'
+ group by forma_de_pagamento;
+ 
+-- Identifica clientes onde a cidade entrega seja diferente da cidade cadastro e a idade do cliente
+select
+ concat(c.pnome , ' ', concat(ifnull(c.minit,''), ' '), c.sobrenome) nome,
+ cc.nome cidade_cadastro, cc.uf uf_cadastro,
+ cp.nome cidade_entrega, cp.uf uf_entrega,
+ year(current_date()) - year(c.data_nascimento) idade
+  from cliente c
+ inner join pedido p
+    on c.idcliente = p.idcliente
+ inner join cidade cc
+    on c.idcidade = cc.idcidade
+ inner join cidade cp
+    on p.idcidade = cp.idcidade
+ where c.idcidade <> p.idcidade;
