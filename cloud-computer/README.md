@@ -1,7 +1,7 @@
 # Módulos curso Imersão Cloud Computer
 
 ## DynamoDB
-** link para conectar ao AWS com o usuário de testes:
+**link para conectar ao AWS com o usuário de testes**
 https://636466190072.signin.aws.amazon.com/console
 
 * Utilizar o AWS CLient para criação de tabelas
