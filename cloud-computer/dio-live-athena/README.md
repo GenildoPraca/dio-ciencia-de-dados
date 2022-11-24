@@ -1,20 +1,23 @@
-# dio-live-athena
-Repositório para a live do dia 01/10/2021 sobre o Amazon Athena
+# Módulos curso Imersão Cloud Computer
 
+## Athena AWS
 ### Serviços utilizados nessa atividade prática
  - Amazon S3
  - Amazon Glue
  - Amazon Athena
  - Amazon QuickSight
 
-### Etapas para desenvolvimento
+***
+***Observações***
+- No subdiretório img foram anexadas as imagens capturadas durante a execução;
+- O subdiretório output contém os arquivos csv gerados na execução das pesquisas;
+- O arquivo ***grafico-quick-sight.pdf*** trata-se do pdf gerado pela aplicação QuickSight na AWS
+***
 
 ### Criar bucket no Amazon S3
-
 - Amazon S3 Console -> Buckets -> Create bucket -> Bucket name [nome_do bucket] - Create bucket
 - Create folder (Criar uma pasta chamada ```/output``` e outra com o nome do seu conjunto de dados. Este nome irá definir o nome da tabela criada no Glue)
 - Upload dos arquivos de dados localizados na pasta ```/data```
-
 #### Criar Glue Crawler
 
 - Amazon Glue Console -> Crawlers -> Add Crawler
@@ -49,4 +52,3 @@ Repositório para a live do dia 01/10/2021 sobre o Amazon Athena
 
 ### Eliminar recursos
  - Exluir os elementos criados
-
